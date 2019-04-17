@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <title>聊天室</title>
+    <style>
+        body {
+            /* background: url(images/b.jpg) no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed; */
+        }
+
+        #login_box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 380px;
+            padding: 35px;
+            border-radius: 15px;
+            /*div圆角*/
+            background: #56666B;
+            color: #fff;
+        }
+
+        label {
+            margin-right: 20px;
+            min-width: 20%;
+        }
+
+        #login_title {
+            color: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login-container">
+        <div class="container" id="top">
+            <div style="margin-top: 240px; text-align: center;">
+                <h1 id='login_title'>用户登录</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div id='login_box'>
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="control-label form-check-label form-check-inline justify-content-end">昵称</label>
+                        <div>
+                            <input class="form-control" type="text" name="user" placeholder="请输入名字" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label form-check-label form-check-inline justify-content-end">用户密码</label>
+                        <div>
+                            <input class="form-control" type="password" name="psw" placeholder="请输入密码" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-around" style="margin-top: 40px;">
+                        <div class="btn btn-primary" id="login">登录</div>
+                        <div class="btn btn-primary" id="register">注册</div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+    <div id="chat">
+
+    </div>
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(function () {
+            let socket = io.connect();
+
+            function getVal() {
+                let formData = $("form").serializeArray();
+                let d = {};
+                $.each(formData, function () {
+                    d[this.name] = this.value;
+                });
+                return d;
+            }
+            $(".btn").on("click", (e) => {
+                let data = getVal();
+                if (data.user === "") {
+                    alert("昵称不能为空");
+                    return
+                }
+                if (data.password === "") {
+                    alert("密码不能为空");
+                    return;
+                }
+                if (e.target.id === "login") {
+                    socket.emit("login", data);
+                } else if (e.target.id === "register") {
+                    socket.emit("register", data);
+                }
+            })
+
+            socket.on('checkLogin', (data) => {
+                if (data.error == 1) {
+                    // 每次发完消息清空input
+                    $("input[name='user']").val('');
+                    $("input[name='psw']").val('');
+                    $("#login-container").hide();
+                    $("#chat").show();
+                } else {
+                    alert(data.notice)
+                }
+            });
+
+            socket.on('checkRegister', (data) => {
+                console.log(data)
+                if (data.error == 1) {
+                    // 每次发完消息清空input
+                    $("input[name='user']").val('')
+                    $("input[name='psw']").val('')
+                };
+                alert(data.notice)
+            });
+        })
+    </script>
+</body>
+
+</html>
