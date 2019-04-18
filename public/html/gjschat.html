@@ -17,66 +17,205 @@
         }
 
         #login_box {
+            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 380px;
-            padding: 35px;
+            padding-bottom: 15px;
+            width: 300px;
             border-radius: 15px;
-            /*div圆角*/
-            background: #56666B;
+            background: #f3f5f7;
             color: #fff;
         }
 
-        label {
-            margin-right: 20px;
-            min-width: 20%;
+        #login_box .title {
+            line-height: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            font-weight: bolder;
+            background: #e7ebef;
+            border-bottom: 1px solid #c2c6ca;
+            border-radius: 15px 15px 0 0;
         }
 
-        #login_title {
-            color: #000000;
+        .ipt-box {
+            margin: 30px auto;
+            width: 240px;
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+            background: #f0f0f0;
+        }
+
+        .pos {
+            position: relative;
+        }
+
+        .ipt-box img {
+            position: absolute;
+            top: 50%;
+            left: 12.5px;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+        }
+
+        .form-control {
+            padding-left: 40px;
+            height: 40px;
+            border: none;
+
+        }
+
+        input,
+        input:focus {
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .btn {
+            display: block;
+            margin: 0 auto 10px;
+            width: 240px;
+            height: 44px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bolder;
+            background: linear-gradient(#3093f0, #1263c3);
+        }
+
+        #chat {
+            /* display: none; */
+            display: block;
+            margin: 50px auto;
+            width: 1202px;
+            height: 772px;
+            border: 1px solid #edf5f8;
+            box-shadow: 10px 10px 5px #e4e7ef;
+        }
+
+        .chatLeft {
+            float: left;
+            width: 240px;
+            height: 100%;
+            background: #000;
+        }
+
+        .chatRight {
+            float: right;
+            width: 960px;
+            height: 100%;
+        }
+
+        .chatRight .title {
+            padding-left: 60px;
+            line-height: 60px;
+            font-weight: bolder;
+        }
+
+        .box {
+            padding: 20px 60px;
+            width: 960px;
+            height: 620px;
+            background: #edf5f8;
+            /* border: 1px solid skyblue; */
+        }
+
+        .list {
+            overflow-y: scroll;
+            height: 580px;
+        }
+
+        .btn-box {
+            margin-left: 95px;
+            padding: 25px 0;
+            line-height: 40px;
+        }
+
+        .btn-box button {
+            display: inline-block
+        }
+
+        #msg {
+            margin-right: 15px;
+            width: 720px;
+            height: 40px;
+            border-radius: 20px;
+            background: #edf5f8;
+            outline: none;
+            text-indent: 30px;
+        }
+
+        #send {
+            box-sizing: border-box;
+            margin: 0;
+            width: 80px;
+            height: 40px;
+            border-radius: 20px;
+        }
+
+        .system {
+            text-align: center;
+            color: #622;
+        }
+
+        .diog {
+            font-size: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div id="login-container">
-        <div class="container" id="top">
-            <div style="margin-top: 240px; text-align: center;">
-                <h1 id='login_title'>用户登录</h1>
+    <div id="login_box">
+        <form action="">
+            <div class="title">User Login</div>
+            <div class="ipt-box">
+                <div class="flex pos">
+                    <img src="./images/user.png" alt="">
+                    <input class="form-control" type="text" name="user" placeholder="User Name"
+                        style="border-radius: 10px 10px 0 0;" />
+                </div>
+                <div class="flex pos">
+                    <img src="./images/password.png" alt="">
+                    <input class="form-control" type="password" name="psw" placeholder="Password"
+                        style="border-radius: 0 0 10px 10px;" />
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div>
+                <div class="btn btn-primary" id="login">Sign In</div>
+                <div class="btn btn-primary" id="register">Sign Up</div>
             </div>
-            <div id='login_box'>
-                <form class="form-horizontal">
-                    <div class="form-group row">
-                        <label class="control-label form-check-label form-check-inline justify-content-end">昵称</label>
-                        <div>
-                            <input class="form-control" type="text" name="user" placeholder="请输入名字" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="control-label form-check-label form-check-inline justify-content-end">用户密码</label>
-                        <div>
-                            <input class="form-control" type="password" name="psw" placeholder="请输入密码" />
-                        </div>
-                    </div>
-
-                    <div class="form-group row justify-content-around" style="margin-top: 40px;">
-                        <div class="btn btn-primary" id="login">登录</div>
-                        <div class="btn btn-primary" id="register">注册</div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4">
-            </div>
-        </div>
+        </form>
     </div>
     <div id="chat">
-
+        <div class="chatLeft"></div>
+        <div class="chatRight">
+            <div class="title">
+                <span>聊天室</span><span class="people"></span>
+            </div>
+            <div class="box">
+                <div class="list" id="list"></div>
+            </div>
+            <div class="btn-box flex">
+                <input type="text" id="msg" placeholder="Leave a comment...">
+                <div class="btn btn-primary" id="send">send</div>
+            </div>
+        </div>
+        <!-- <h4 class="header">聊天室</h4>
+        <div class="people"></div>
+        <div class="box">
+            <div class="list" id="list"></div>
+            <div class="footer"></div>
+        </div>
+        <div class="btn-box">
+            <input type="text" id="msg">
+            <button class="btn btn-primary" id="send">发送</button>
+        </div> -->
     </div>
 
     <script src="./js/jquery.min.js"></script>
@@ -92,21 +231,47 @@
                     d[this.name] = this.value;
                 });
                 return d;
-            }
-            $(".btn").on("click", (e) => {
-                let data = getVal();
-                if (data.user === "") {
-                    alert("昵称不能为空");
-                    return
-                }
-                if (data.password === "") {
-                    alert("密码不能为空");
+            };
+
+            function send() {
+                let msg = $("#msg").val();
+                if (msg.trim().length === 0) {
+                    alert("请输入内容");
                     return;
+                };
+                socket.emit("postMsg", msg);
+                $("#msg").val('');
+            };
+
+            function getDown(){
+                let scrollHeight = $(".list").prop("scrollHeight") - 16;
+                $(".list").scrollTop(scrollHeight)
+            };
+            //回车事件
+            $(document).keyup(function (event) {
+                if (event.keyCode == 13) {
+                    send();
                 }
-                if (e.target.id === "login") {
-                    socket.emit("login", data);
-                } else if (e.target.id === "register") {
-                    socket.emit("register", data);
+            });
+
+            $(".btn").on("click", (e) => {
+                if (e.target.id === "send") {
+                    send();
+                } else {
+                    let data = getVal();
+                    if (data.user === "") {
+                        alert("昵称不能为空");
+                        return
+                    }
+                    if (data.password === "") {
+                        alert("密码不能为空");
+                        return;
+                    }
+                    if (e.target.id === "login") {
+                        socket.emit("login", data);
+                    } else if (e.target.id === "register") {
+                        socket.emit("register", data);
+                    }
                 }
             })
 
@@ -115,7 +280,7 @@
                     // 每次发完消息清空input
                     $("input[name='user']").val('');
                     $("input[name='psw']").val('');
-                    $("#login-container").hide();
+                    $("#login_box").hide();
                     $("#chat").show();
                 } else {
                     alert(data.notice)
@@ -123,7 +288,6 @@
             });
 
             socket.on('checkRegister', (data) => {
-                console.log(data)
                 if (data.error == 1) {
                     // 每次发完消息清空input
                     $("input[name='user']").val('')
@@ -131,6 +295,17 @@
                 };
                 alert(data.notice)
             });
+            socket.on("serveMsg", (name, msg) => {
+                $('.list').append(`<p class="diog">${name}: ${msg}</p>`);
+                getDown();
+            })
+            socket.on("system", (name, count, type) => {
+                let message = type === "login" ? `欢迎老铁${name}进入聊天室` : `恭送老铁${name}离开`;
+                let num = `${count}位老铁在线`;
+                $('.list').append(`<p class="system">${message}</p>`);
+                $('.people').html(num);
+                getDown();
+            })
         })
     </script>
 </body>
